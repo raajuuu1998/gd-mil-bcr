@@ -1,0 +1,7 @@
+torch>=2.0
+numpy>=1.23
+pandas>=1.5
+scikit-learn>=1.2
+lifelines>=0.27
+matplotlib>=3.6
+pyyaml>=6.0

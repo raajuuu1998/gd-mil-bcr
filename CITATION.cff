@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the following."
+title: "GD-MIL: Grade-Disentangled Multiple Instance Learning for Multimodal Biochemical Recurrence Prediction in Prostate Cancer"
+authors:
+  - family-names: "Dasari"
+    given-names: "Naga Raju"
+    email: raajuuu1998@gmail.com
+year: 2026
+version: 1.0.0
+repository-code: "https://github.com/raajuuu1998/gd-mil-bcr"
+license: MIT
+preferred-citation:
+  type: article
+  title: "GD-MIL: Grade-Disentangled Multiple Instance Learning for Multimodal Biochemical Recurrence Prediction in Prostate Cancer"
+  authors:
+    - family-names: "Dasari"
+      given-names: "Naga Raju"
+  year: 2026
+  notes: "Under review"

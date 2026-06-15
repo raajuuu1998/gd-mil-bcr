@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Data and model artifacts (not redistributed)
+data/
+*.pt
+*.pth
+*.pkl
+*.joblib
+
+# Results (regenerate with scripts)
+results/*.json
+!results/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,54 @@
+# ============================================================
+# GD-MIL default configuration
+# ============================================================
+
+data:
+  root: data/TCGA_PRAD
+  cohort_csv: data/TCGA_PRAD/cohort.csv      # patient_id, bcr_event, survival_time, grade_group, t_stage, age
+  embeddings:
+    uni2h:    data/TCGA_PRAD/embeddings_uni2h     # d = 1536
+    virchow2: data/TCGA_PRAD/embeddings_virchow2  # d = 1280
+    resnet50: data/TCGA_PRAD/embeddings_resnet50  # d = 512
+
+cohort:
+  n_patients: 487
+  n_events: 101
+  event_rate: 0.207
+  median_followup_days: 559
+
+feature_extraction:
+  tile_size: 256          # px
+  target_mpp: 1.0         # micron / px  (~10x)
+  max_tiles: 2000
+  tissue_filter: hsv
+  stain_norm: false
+  augmentation: false
+
+model:
+  backbone: gadvmil       # abmil | clam | transmil | patchgcn | gadvmil
+  in_dim: 1536            # set by feature extractor
+  hidden_dim: 256
+  attn_dim: 128
+  dropout: 0.25
+  lam: 0.5                # gradient-reversal adversary strength (GD-MIL only)
+
+training:
+  optimizer: adam
+  lr: 0.0003
+  weight_decay: 0.00001
+  scheduler: cosine
+  epochs: 30
+  grad_clip_norm: 1.0
+  batch: 1                # one slide per step (variable bag size)
+
+evaluation:
+  n_folds: 5
+  stratify_by: bcr_event
+  inner_val_frac: 0.15    # held out within each train fold for early stopping
+  seeds: [0, 1, 2, 3, 4]  # report mean +/- std across seeds
+  n_bootstrap: 2000       # bootstrap CI + paired significance resamples
+
+fusion:
+  clinical_cols: [grade_group, t_stage, age]
+  cox_penalizer: 0.1
+  fit_on: oof_imaging_risk   # leakage-free: fusion fitted only on OOF scores
